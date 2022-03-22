@@ -12,7 +12,7 @@ const ballRadius = 6;
 const platSize = 80;
 const maxAngleDiff = 60;
 const stepSize = 1;
-const stepDelay = 10;
+const stepDelay = 9;
 var canvas = document.getElementById('game-field');
 var context = canvas.getContext("2d");
 context.scale(0.5, 0.375);
