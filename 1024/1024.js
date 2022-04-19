@@ -10,19 +10,6 @@ function init() {
     addNewNumber(2);
     addNewNumber(2);
     addNewNumber(4);
-     /*field[0][0] = 2;
-     field[1][3] = 2;
-     field[1][2] = 4;
-     field[1][1] = 2;
-     field[1][0] = 2;
-     field[2][3] = 2;
-     field[2][2] = 4;
-     field[2][1] = 2;
-     field[2][0] = 2;
-     field[3][3] = 2;
-     field[3][2] = 4;
-     field[3][1] = 2;
-     field[3][0] = 2;*/
     redraw();
     //putNumber(Math.floor(Math.random() * 15), 2);
 }
@@ -31,10 +18,12 @@ function init() {
 function putNumber(tileNumber, value) {
     var tile = document.getElementById('tile' + tileNumber);
     //console.log('tile' + tileNumber);
+    tile.setAttribute('class', 'tile');
     if (!value) {
         tile.innerHTML = '';
     } else {
         tile.innerHTML = value;
+        tile.classList.add('num' + value);
     }
 }
 
@@ -97,9 +86,9 @@ function keyPress(event) {
             }
         }
     }
-  
-     if (event.key === 'ArrowDown') {
-         for (var i = 0; i < 4; i++) {
+
+    if (event.key === 'ArrowDown') {
+        for (var i = 0; i < 4; i++) {
             t = 3;
             for (var j = 2; j > -1 && t > -1; ) {
                 if (field[j][i]) {
@@ -125,8 +114,8 @@ function keyPress(event) {
                 }
             }
         }
-     }
-     if (event.key === 'ArrowUp') {//move tiles to the left
+    }
+    if (event.key === 'ArrowUp') {//move tiles to the left
         for (var i = 0; i < 4; i++) {
             t = 0;
             for (var j = 1; j < 4 && t < 4; ) {
@@ -154,10 +143,10 @@ function keyPress(event) {
             }
         }
     }
-   if (changed) {
+    if (changed) {
         addNewNumber(2);
         redraw();
-    }    
+    }
 }
 
 function redraw() {
@@ -197,3 +186,4 @@ function addNewNumber(number) {
         }
     }    //every time you call NewNumber a new number only apears in an empty cell
 }
+
