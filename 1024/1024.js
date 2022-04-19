@@ -187,3 +187,54 @@ function addNewNumber(number) {
     }    //every time you call NewNumber a new number only apears in an empty cell
 }
 
+/*function shiftNumbers(dir, spin) {
+    var t, changed = false;
+    for (var i = 0; i < 4; i++) {
+        t = spin < 0 ? 3 : 0;
+        for (var j = spin < 0 ? 2 : 1; spin < 0?(j > -1):(j < 4);) {
+            if (field[dir?j:i][dir?i:j]) {
+                if (!field[dir?t:i][dir?i:t]) {
+                    changed = true;
+                    field[dir?t:i][dir?i:t] = field[dir?j:i][dir?i:j];
+                    field[dir?j:i][dir?i:j] = 0;
+                    j = j + spin;
+                } else if (field[dir?j:i][dir?i:j] === field[dir?t:i][dir?i:t]) {
+                    changed = true;
+                    field[dir?t:i][dir?i:t] *= 2;
+                    field[dir?j:i][dir?i:j] = 0;
+                    j = j + spin
+                    t = t + spin;
+                } else {
+                    t = t + spin;
+                    if (j === t) {
+                        j = j + spin;
+                    }
+                }
+            } else {
+                j = j + spin;
+            }
+        }
+    }
+    return changed;
+}
+
+function keyPress(event) {
+    var t, changed = false;
+    console.log('hello');
+    if (event.key === 'ArrowLeft') {//move tiles to the left
+        changed = shiftNumbers(0,1);
+    }
+    if (event.key === 'ArrowRight') {//move tiles to the right
+        changed = shiftNumbers(0,-1);
+    }
+    if (event.key === 'ArrowDown') {
+        changed = shiftNumbers(1,-1);
+    }
+    if (event.key === 'ArrowUp') {//move tiles to the left
+        changed = shiftNumbers(1,1);
+    }
+    if (changed) {
+        addNewNumber(2);
+        redraw();
+    }
+}*/
