@@ -31,122 +31,178 @@
                     tile.classList.add('num' + value);
                 }
             }
-
-            function keyPress(event) {
+            function numbersLeft() {
                 var t, changed = false;
-                console.log('hello');
-                if (event.key === 'ArrowLeft') {//move tiles to the left
-                    for (var i = 0; i < 4; i++) {
-                        t = 0;
-                        for (var j = 1; j < 4 && t < 4; ) {
-                            if (field[i][j]) {
-                                if (!field[i][t]) {
-                                    changed = true;
-                                    field[i][t] = field[i][j];
-                                    field[i][j] = 0;
-                                    j++;
-                                } else if (field[i][j] === field[i][t]) {
-                                    changed = true;
-                                    field[i][t] = field[i][t] * 2;
-                                    field[i][j] = 0;
-                                    j++;
-                                    t++;
-                                } else {
-                                    t++;
-                                    if (t >= j) {
-                                        j++;
-                                    }
-                                }
-                            } else {
+                for (var i = 0; i < 4; i++) {
+                    t = 0;
+                    for (var j = 1; j < 4 && t < 4; ) {
+                        if (field[i][j]) {
+                            if (!field[i][t]) {
+                                changed = true;
+                                field[i][t] = field[i][j];
+                                field[i][j] = 0;
                                 j++;
+                            } else if (field[i][j] === field[i][t]) {
+                                changed = true;
+                                field[i][t] = field[i][t] * 2;
+                                field[i][j] = 0;
+                                j++;
+                                t++;
+                            } else {
+                                t++;
+                                if (t >= j) {
+                                    j++;
+                                }
                             }
+                        } else {
+                            j++;
                         }
                     }
                 }
-                if (event.key === 'ArrowRight') {//move tiles to the right
-                    for (var i = 0; i < 4; i++) {
-                        t = 3;
-                        for (var j = 2; j > -1 && t > -1; ) {
-                            if (field[i][j]) {
-                                if (!field[i][t]) {
-                                    changed = true;
-                                    field[i][t] = field[i][j];
-                                    field[i][j] = 0;
-                                    j--;
-                                } else if (field[i][j] === field[i][t]) {
-                                    changed = true;
-                                    field[i][t] = field[i][t] * 2;
-                                    field[i][j] = 0;
-                                    j--;
-                                    t--;
-                                } else {
-                                    t--;
-                                    if (t <= j) {
-                                        j--;
-                                    }
-                                }
-                            } else {
+                return changed;
+            }
+            function numbersRight() {
+                var t, changed = false;
+                for (var i = 0; i < 4; i++) {
+                    t = 3;
+                    for (var j = 2; j > -1 && t > -1; ) {
+                        if (field[i][j]) {
+                            if (!field[i][t]) {
+                                changed = true;
+                                field[i][t] = field[i][j];
+                                field[i][j] = 0;
                                 j--;
+                            } else if (field[i][j] === field[i][t]) {
+                                changed = true;
+                                field[i][t] = field[i][t] * 2;
+                                field[i][j] = 0;
+                                j--;
+                                t--;
+                            } else {
+                                t--;
+                                if (t <= j) {
+                                    j--;
+                                }
                             }
+                        } else {
+                            j--;
                         }
                     }
+                }
+                return changed;
+            }
+            function numbersDown() {
+                var t, changed = false;
+                for (var i = 0; i < 4; i++) {
+                    t = 3;
+                    for (var j = 2; j > -1 && t > -1; ) {
+                        if (field[j][i]) {
+                            if (!field[t][i]) {
+                                changed = true;
+                                field[t][i] = field[j][i];
+                                field[j][i] = 0;
+                                j--;
+                            } else if (field[j][i] === field[t][i]) {
+                                changed = true;
+                                field[t][i] = field[t][i] * 2;
+                                field[j][i] = 0;
+                                j--;
+                                t--;
+                            } else {
+                                t--;
+                                if (t <= j) {
+                                    j--;
+                                }
+                            }
+                        } else {
+                            j--;
+                        }
+                    }
+                }
+                return changed;
+            }
+            function numbersUp() {
+                var t, changed = false;
+                for (var i = 0; i < 4; i++) {
+                    t = 0;
+                    for (var j = 1; j < 4 && t < 4; ) {
+                        if (field[j][i]) {
+                            if (!field[t][i]) {
+                                changed = true;
+                                field[t][i] = field[j][i];
+                                field[j][i] = 0;
+                                j++;
+                            } else if (field[j][i] === field[t][i]) {
+                                changed = true;
+                                field[t][i] = field[t][i] * 2;
+                                field[j][i] = 0;
+                                j++;
+                                t++;
+                            } else {
+                                t++;
+                                if (t >= j) {
+                                    j++;
+                                }
+                            }
+                        } else {
+                            j++;
+                        }
+                    }
+                }
+                return changed;
+            }
+            function swipeHandler(event) {
+                var changed = false;
+                if (event.key === 'ArrowLeft') {//move tiles to the left
+                    changed = numbersLeft();
+                }
+                if (event.key === 'ArrowRight') {//move tiles to the right
+                    changed = numbersRight();
                 }
 
                 if (event.key === 'ArrowDown') {
-                    for (var i = 0; i < 4; i++) {
-                        t = 3;
-                        for (var j = 2; j > -1 && t > -1; ) {
-                            if (field[j][i]) {
-                                if (!field[t][i]) {
-                                    changed = true;
-                                    field[t][i] = field[j][i];
-                                    field[j][i] = 0;
-                                    j--;
-                                } else if (field[j][i] === field[t][i]) {
-                                    changed = true;
-                                    field[t][i] = field[t][i] * 2;
-                                    field[j][i] = 0;
-                                    j--;
-                                    t--;
-                                } else {
-                                    t--;
-                                    if (t <= j) {
-                                        j--;
-                                    }
-                                }
-                            } else {
-                                j--;
-                            }
-                        }
-                    }
+                    changed = numbersDown();
                 }
                 if (event.key === 'ArrowUp') {//move tiles to the left
-                    for (var i = 0; i < 4; i++) {
-                        t = 0;
-                        for (var j = 1; j < 4 && t < 4; ) {
-                            if (field[j][i]) {
-                                if (!field[t][i]) {
-                                    changed = true;
-                                    field[t][i] = field[j][i];
-                                    field[j][i] = 0;
-                                    j++;
-                                } else if (field[j][i] === field[t][i]) {
-                                    changed = true;
-                                    field[t][i] = field[t][i] * 2;
-                                    field[j][i] = 0;
-                                    j++;
-                                    t++;
-                                } else {
-                                    t++;
-                                    if (t >= j) {
-                                        j++;
-                                    }
-                                }
-                            } else {
-                                j++;
-                            }
-                        }
-                    }
+                    changed = numbersUp();
+                }
+                if (changed) {
+                    addNewNumber(2);
+                    redraw();
+                }
+            }
+            const slider = document.getElementById('slider')
+
+            function handleGesture() {
+                if (touchendX < touchstartX)
+                    alert('swiped left!')
+                if (touchendX > touchstartX)
+                    alert('swiped right!')
+            }
+
+            slider.addEventListener('touchstart', e => {
+                touchstartX = e.changedTouches[0].screenX
+            })
+
+            slider.addEventListener('touchend', e => {
+                touchendX = e.changedTouches[0].screenX
+                handleGesture()
+            })
+            
+            function keyPress(event) {
+                var changed = false;
+                if (event.key === 'ArrowLeft') {//move tiles to the left
+                    changed = numbersLeft();
+                }
+                if (event.key === 'ArrowRight') {//move tiles to the right
+                    changed = numbersRight();
+                }
+
+                if (event.key === 'ArrowDown') {
+                    changed = numbersDown();
+                }
+                if (event.key === 'ArrowUp') {//move tiles to the left
+                    changed = numbersUp();
                 }
                 if (changed) {
                     addNewNumber(2);
@@ -177,7 +233,6 @@
                     return;
                 }
                 var randomNumber = Math.floor(Math.random() * (count - 1));
-                //  console.log(randomNumber + ' ' + count);
                 count = 0;
                 for (var i = 0; i < 4; i++) {
                     for (var j = 0; j < 4; j++) {
@@ -191,7 +246,9 @@
                     }
                 }    //every time you call NewNumber a new number only apears in an empty cell
             }
+            function screenSwipe() {
 
+            }
             /*function shiftNumbers(dir, spin) {
              var t, changed = false;
              for (var i = 0; i < 4; i++) {
