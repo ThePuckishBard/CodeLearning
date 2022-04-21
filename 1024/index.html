@@ -151,44 +151,48 @@
                 }
                 return changed;
             }
-            function swipeHandler(event) {
+            function swipeHandler() {
                 var changed = false;
-                if (event.key === 'ArrowLeft') {//move tiles to the left
-                    changed = numbersLeft();
-                }
-                if (event.key === 'ArrowRight') {//move tiles to the right
-                    changed = numbersRight();
-                }
-
-                if (event.key === 'ArrowDown') {
-                    changed = numbersDown();
-                }
-                if (event.key === 'ArrowUp') {//move tiles to the left
-                    changed = numbersUp();
+                var distanceV = Math.abs(touchstartY - touchendY);
+                var distanceH = Math.abs(touchstartX - touchendX);
+                if (distanceV < distanceH) {
+                    if (touchstartX > touchendX) {// left
+                        changed = numbersLeft();
+                    }
+                    if (touchstartX < touchendX) {// right
+                        changed = numbersRight();
+                    }
+                } else {
+                    if (touchstartY < touchendY) {// down
+                        changed = numbersDown();
+                    }
+                    if (touchstartY > touchendY) {// up
+                        changed = numbersUp();
+                    }
                 }
                 if (changed) {
                     addNewNumber(2);
                     redraw();
                 }
-            }
-            const slider = document.getElementById('slider')
 
-            function handleGesture() {
-                if (touchendX < touchstartX)
-                    alert('swiped left!')
-                if (touchendX > touchstartX)
-                    alert('swiped right!')
             }
 
-            slider.addEventListener('touchstart', e => {
-                touchstartX = e.changedTouches[0].screenX
-            })
+            var touchstartX, touchstartY, touchendX, touchendY;
 
-            slider.addEventListener('touchend', e => {
-                touchendX = e.changedTouches[0].screenX
-                handleGesture()
-            })
-            
+
+            function touchStart(event) {
+                touchstartX = event.changedTouches[0].screenX;
+                touchstartY = event.changedTouches[0].screenY;
+            }
+            document.addEventListener('touchstart', touchStart);
+
+            function touchEnd(event) {
+                touchendX = event.changedTouches[0].screenX;
+                touchendY = event.changedTouches[0].screenY;
+                swipeHandler();
+            }
+            document.addEventListener('touchend', touchEnd);
+
             function keyPress(event) {
                 var changed = false;
                 if (event.key === 'ArrowLeft') {//move tiles to the left
