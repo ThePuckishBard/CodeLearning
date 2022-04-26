@@ -8,21 +8,22 @@
             for (var j = 0; j < 4; j++) {
                 field[j] = new Array(4);
             }
+            cosole.log('one');
             window.addEventListener('pageshow', init);
-//redraw();
+            cosole.log('two');
             window.addEventListener("keydown", keyPress);
+            cosole.log('three');
             function init() {
+                console.log('init');
                 addNewNumber(2);
                 addNewNumber(2);
                 addNewNumber(4);
                 redraw();
-                //putNumber(Math.floor(Math.random() * 15), 2);
             }
 
 
             function putNumber(tileNumber, value) {
                 var tile = document.getElementById('tile' + tileNumber);
-                //console.log('tile' + tileNumber);
                 tile.setAttribute('class', 'tile');
                 if (!value) {
                     tile.innerHTML = '';
@@ -185,6 +186,7 @@
                 touchstartY = event.changedTouches[0].screenY;
             }
             document.addEventListener('touchstart', touchStart);
+            console.log('touchStart');
 
             function touchEnd(event) {
                 touchendX = event.changedTouches[0].screenX;
@@ -192,6 +194,7 @@
                 swipeHandler();
             }
             document.addEventListener('touchend', touchEnd);
+            cosole.log('touchEnd');
 
             function keyPress(event) {
                 var changed = false;
@@ -215,11 +218,13 @@
             }
 
             function redraw() {
+                console.log('redraw');
                 for (var i = 0; i < 4; i++) {
                     for (var j = 0; j < 4; j++) {
                         putNumber('' + i + j, field[i][j]);
                     }
                 }
+                console.log('redrawFinish');
             }
 
 
@@ -350,7 +355,7 @@
             .num2048 {
                 background-color:#7A100E;
             } 
-             .num4096 {
+            .num4096 {
                 background-color:#5F0806  ;
             } 
             #mainField{
