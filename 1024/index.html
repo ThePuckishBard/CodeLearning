@@ -9,7 +9,7 @@
                 field[j] = new Array(4);
             }
             console.log('one');
-            window.addEventListener('pageshow', init);
+          
             console.log('two');
             window.addEventListener("keydown", keyPress);
             console.log('three');
@@ -258,6 +258,11 @@
             function screenSwipe() {
 
             }
+            if (document.readyState === 'complete') {
+                init();
+            } else {
+                window.addEventListener('load', init);
+            }
             /*function shiftNumbers(dir, spin) {
              var t, changed = false;
              for (var i = 0; i < 4; i++) {
@@ -309,6 +314,7 @@
              redraw();
              }
              }*/
+
         </script>
         <style>
             .tile {
@@ -363,6 +369,7 @@
                 grid-template-columns: repeat(4, 150px);
                 gap: 5px;  
             }
+
 
         </style>
 
