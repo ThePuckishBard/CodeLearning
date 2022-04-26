@@ -9,7 +9,7 @@
                 field[j] = new Array(4);
             }
             console.log('one');
-          
+
             console.log('two');
             window.addEventListener("keydown", keyPress);
             console.log('three');
@@ -263,6 +263,8 @@
             } else {
                 window.addEventListener('load', init);
             }
+
+
             /*function shiftNumbers(dir, spin) {
              var t, changed = false;
              for (var i = 0; i < 4; i++) {
@@ -368,8 +370,10 @@
                 display: grid;
                 grid-template-columns: repeat(4, 150px);
                 gap: 5px;  
+            } 
+            html,body {
+                overscroll-behavior-y: contain;
             }
-
 
         </style>
 
