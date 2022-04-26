@@ -3,7 +3,7 @@ var field = new Array(4);
 for (var j = 0; j < 4; j++) {
     field[j] = new Array(4);
 }
-window.addEventListener("load", init);
+window.addEventListener('pageshow', init);
 //redraw();
 window.addEventListener("keydown", keyPress);
 function init() {
