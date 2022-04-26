@@ -8,11 +8,11 @@
             for (var j = 0; j < 4; j++) {
                 field[j] = new Array(4);
             }
-            cosole.log('one');
+            console.log('one');
             window.addEventListener('pageshow', init);
-            cosole.log('two');
+            console.log('two');
             window.addEventListener("keydown", keyPress);
-            cosole.log('three');
+            console.log('three');
             function init() {
                 console.log('init');
                 addNewNumber(2);
@@ -194,7 +194,7 @@
                 swipeHandler();
             }
             document.addEventListener('touchend', touchEnd);
-            cosole.log('touchEnd');
+            console.log('touchEnd');
 
             function keyPress(event) {
                 var changed = false;
