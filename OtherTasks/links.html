@@ -1,0 +1,168 @@
+<html>
+    <script type="text/javascript">
+
+        class Node {
+            value;
+            link;
+            constructor(value) {
+                this.value = value;
+            }
+
+        }
+
+//root = new Node(15);
+//root.link = new Node (85)
+
+        var root = null;
+        function addElement(value) {
+            var t = new Node(value);
+            if (!root) {
+                root = t;
+                return;
+            }
+            var q = root;
+            for (; q.link; q = q.link) {
+            }
+            q.link = t;
+        }
+        function deleteElement(value) {
+            var b = root;
+            for (; b; b = b.link) {
+                if (b.link && b.link.value === value) {
+                    b.link = b.link.link;
+                    return;
+                }
+            }
+        }
+        function isElementExist(value) {
+            var b = root;
+            for (; b; b = b.link) {
+                if (b.value === value) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        function indexOf(value) {
+            var b = root;
+            var t = 0;
+            for (; b; b = b.link) {
+                if (b.value === value) {
+                    return t;
+                }
+                t++;
+            }
+            return -1;
+        }
+        function lastIndexOf(value) { //find the last element with the value provided. 
+            var b = root;
+            var t = 0;
+            var save = -1;
+            for (; b; b = b.link) {
+                if (b.value === value) {
+                    save = t;
+                }
+                t++;
+            }
+            return save;
+        }
+        function listSize() {//output size of list
+            var b = root;
+            var t = 0;
+            for (; b; b = b.link) {
+                t++;
+            }
+            return t;
+        }
+        function listToSet() {//return an array of list element without duplicates
+            var r = root;
+            var array = new Array();
+            var exist;
+            var t;
+            for (; r; r = r.link) {
+                exist = false;
+                for (t = 0; t < array.length; t++) {
+                    if (array[t] === r.value) {
+                        exist = true;
+                    }
+                }
+                if (!exist) {
+                    array[t] = r.value;
+                }
+            }
+            return array;
+        }
+        function addAll(array) {//add all elements from array to list
+           for (var j = 0; j < array.length; j++){
+                var t = new Node(array[t]);
+            if (!root) {
+                root = t;
+                return;
+            }
+            var q = root;
+            for (; q.link; q = q.link) {
+            }
+            q.link = t;
+           }
+        }
+        
+
+        //--------------------------------------//
+        function testOne() {
+            root = null;
+            addElement(3);
+            addElement(4);
+            addElement(9);
+            addElement(10);
+            addElement(13);
+            if (isElementExist(9)) {
+                deleteElement(9);
+            }
+            outPut();
+            console.log(root);
+        }
+        function testTwo() {
+            root = null;
+            deleteElement(10);
+            console.log('output root: ' + root);
+        }
+        function testThree() {
+            root = null;
+            addElement(3);
+            addElement(9);
+            addElement(9);
+            addElement(10);
+            console.log('list to set ' + listToSet());
+        }
+        function testFour() {
+            root = null;
+            addElement(3);
+            addElement(9);
+            addElement(9);
+            addElement(10);
+            console.log('isExist: ' + isElementExist(9));
+        }
+        function testFive() {
+            var array = [1, 5, 7, 99, 2];
+            console.log('addAll ' + addAll(array));
+        }
+
+        function outPut() {
+            var w = root;
+            for (; w; w = w.link) {
+                console.log(w.value);
+            }
+        }
+
+        testOne();
+        testTwo();
+        testThree();
+        testFour();
+        testFive();
+        // * add element function,
+        // * remove element function, 
+        // * check if element exists function
+    </script>
+    <body>
+    </body>
+</html>
